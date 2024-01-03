@@ -17,7 +17,6 @@ def exec_program(path_to_data="/Users/rushil/Downloads/Finance-Visualizer/data",
             convert_image_to_string(path)
 
     for text_path in list_files_in_folder(path_to_text):
-        ipdb.set_trace()
         expenses = dict_of_all_expenses(text_path)
         # TODO: SEND TO DATABASE
 

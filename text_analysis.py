@@ -3,14 +3,15 @@ from sklearn.naive_bayes import MultinomialNB
 
 # Sample data: phrases and their corresponding categories
 data = [
-    ("I love programming", "Programming"),
-    ("Basketball is my favorite sport", "Sports"),
+    ("I love programming", "Personal Finances"),
+    ("Basketball is my favorite sport", "Groceries"),
     ("The new movie is amazing", "Entertainment"),
-    ("I enjoy cooking", "Cooking"),
-    ("Python is a powerful language", "Programming"),
-    ("Soccer is a great sport", "Sports"),
-    ("I like to watch movies", "Entertainment"),
-    ("I am experimenting with new recipes", "Cooking"),
+    ("I enjoy cooking", "Eating Out"),
+    ("Python is a powerful language", "Transportation"),
+    ("Soccer is a great sport", "Education"),
+    ("I like to watch movies", "Clothing"),
+    ("I am experimenting with new recipes", "Online Payments"),
+    ("I am experimenting with new recipes", "Miscellaneous"),
 ]
 
 # Separate the data into features (X) and labels (y)
