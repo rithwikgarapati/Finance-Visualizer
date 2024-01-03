@@ -4,25 +4,34 @@ import os
 import ipdb
 
 
-def exec_program(path_to_data="/Users/rushil/Downloads/Finance-Visualizer/data", 
-                 path_to_text="/Users/rushil/Downloads/Finance-Visualizer/text"):
+def exec_program(path_to_data, path_to_text, tesseract_exec_path, del_bank_statements):
 
     data_paths = list_files_in_folder(path_to_data)
 
-    for path in data_paths:
+    if path_to_data[-1] != "/":
+        path_to_data = path_to_data + "/"
 
-        if os.path.exists("/text/" + path.split("/")[-1]):
+    if path_to_text[-1] != "/":
+        path_to_text = path_to_text + "/"
+
+    for path in data_paths:
+        file_name = path_to_text + path.split("/")[-1].split(".")[0] + ".txt"
+        if file_name in list_files_in_folder(path_to_text):
+            file_name = path.split("/")[-1]
+            print(f"Text already generated for Image: {file_name}")
             continue
         else:
-            convert_image_to_string(path)
+            convert_image_to_string(path, path_to_text, tesseract_exec_path)
 
     for text_path in list_files_in_folder(path_to_text):
         expenses = dict_of_all_expenses(text_path)
+        expenses_dict = {"name": text_path.split("/")[-1].split(".")[0], "data": expenses}
+        print(expenses_dict)
         # TODO: SEND TO DATABASE
 
-
-    for del_path in list_files_in_folder(path_to_text):
-        clean_file(del_path)
+    if del_bank_statements:
+        for del_path in list_files_in_folder(path_to_text):
+            clean_file(del_path)
 
 
 def list_files_in_folder(folder_path):
@@ -44,5 +53,12 @@ def clean_file(url):
 
 
 if __name__ == "__main__":
-    exec_program()
+
+    # CHANGE THESE VARIABLES DEPENDING ON YOUR LOCAL MACHINE'S ENVIRONMENT
+    path_to_data = "/Users/rushil/Downloads/Finance-Visualizer/data", 
+    path_to_text = "/Users/rushil/Downloads/Finance-Visualizer/text",
+    tesseract_exec_path = "/usr/local/bin/tesseract",
+    del_bank_statements = True
+
+    exec_program(path_to_data, path_to_text, tesseract_exec_path, del_bank_statements)
 

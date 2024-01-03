@@ -1,7 +1,6 @@
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 
-# Sample data: phrases and their corresponding categories
 data = [
     ("I love programming", "Personal Finances"),
     ("Basketball is my favorite sport", "Groceries"),

@@ -3,7 +3,7 @@ import pytesseract
 import ipdb
 
 
-def convert_image_to_string(url, tesseract_exec_path='/usr/local/bin/tesseract'):
+def convert_image_to_string(url, text_data, tesseract_exec_path):
     pytesseract.pytesseract.tesseract_cmd = tesseract_exec_path
 
     img = cv2.imread(url)
@@ -29,7 +29,7 @@ def convert_image_to_string(url, tesseract_exec_path='/usr/local/bin/tesseract')
 
         text = pytesseract.image_to_string(cropped)
 
-        file_path = 'text/' + url.split("/")[-1]
+        file_path = text_data + url.split("/")[-1]
         file_path = file_path.split(".")[0] + ".txt"
         file = open(file_path, "a")
         file.write(text)
