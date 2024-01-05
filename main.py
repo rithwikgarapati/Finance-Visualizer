@@ -55,9 +55,9 @@ def clean_file(url):
 if __name__ == "__main__":
 
     # CHANGE THESE VARIABLES DEPENDING ON YOUR LOCAL MACHINE'S ENVIRONMENT
-    path_to_data = "/Users/rushil/Downloads/Finance-Visualizer/data", 
-    path_to_text = "/Users/rushil/Downloads/Finance-Visualizer/text",
-    tesseract_exec_path = "/usr/local/bin/tesseract",
+    path_to_data = "/Users/rithwikgarapati/Desktop/Finance-visualizer/Finance-Visualizer/data"
+    path_to_text = "/Users/rithwikgarapati/Desktop/Finance-visualizer/Finance-Visualizer/text"
+    tesseract_exec_path = '/usr/local/bin/tesseract'
     del_bank_statements = True
 
     exec_program(path_to_data, path_to_text, tesseract_exec_path, del_bank_statements)
