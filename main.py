@@ -1,5 +1,6 @@
 from image_processing import convert_image_to_string
 from text_processing import dict_of_all_expenses
+from text_analysis import TextAnalysis
 import os
 import ipdb
 
@@ -7,6 +8,7 @@ import ipdb
 def exec_program(path_to_data, path_to_text, tesseract_exec_path, del_bank_statements):
 
     data_paths = list_files_in_folder(path_to_data)
+    analyzer = TextAnalysis()
 
     if path_to_data[-1] != "/":
         path_to_data = path_to_data + "/"
@@ -25,8 +27,13 @@ def exec_program(path_to_data, path_to_text, tesseract_exec_path, del_bank_state
 
     for text_path in list_files_in_folder(path_to_text):
         expenses = dict_of_all_expenses(text_path)
+        expenses_statements = [entry[0] for entry in expenses]
+        expenses_predictions = analyzer.predict(expenses_statements)
+        for a, b in zip(expenses, expenses_predictions):
+            a.append(b)
         expenses_dict = {"name": text_path.split("/")[-1].split(".")[0], "data": expenses}
         print(expenses_dict)
+
         # TODO: SEND TO DATABASE
 
     if del_bank_statements:
@@ -55,9 +62,9 @@ def clean_file(url):
 if __name__ == "__main__":
 
     # CHANGE THESE VARIABLES DEPENDING ON YOUR LOCAL MACHINE'S ENVIRONMENT
-    path_to_data = "/Users/rushil/Downloads/Finance-Visualizer/data", 
-    path_to_text = "/Users/rushil/Downloads/Finance-Visualizer/text",
-    tesseract_exec_path = "/usr/local/bin/tesseract",
+    path_to_data = "/Users/rushil/Downloads/Finance-Visualizer/data"
+    path_to_text = "/Users/rushil/Downloads/Finance-Visualizer/text"
+    tesseract_exec_path = "/usr/local/bin/tesseract"
     del_bank_statements = True
 
     exec_program(path_to_data, path_to_text, tesseract_exec_path, del_bank_statements)
